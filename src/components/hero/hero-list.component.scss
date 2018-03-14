@@ -17,7 +17,8 @@
 	
 	.item {
 		background-color: white;
-		padding: 20px;  
+		padding: 20px;
+		margin: 50px;  
 		width: 320px;
 		height: 120px;
 		margin-top: 15px;
@@ -25,7 +26,7 @@
 			
 		font-family: Arial, Helvetica, sans-serif;
 	}
-
+	
 	@include max-width(992px) {
 		.item {
 			flex-basis: 33%;		

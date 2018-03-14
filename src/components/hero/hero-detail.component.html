@@ -1,15 +1,11 @@
-<div class="row" (click)="onSelect.emit(hero)" [class.selected]="hero === selectedHero">
+<div class="row">
     <div class="order">{{ hero._id | convertToOrdinal}}</div>
     <div class="col-xs-6">
-        <img [src]='hero._picture' class="image"/>
+        <img [src]='hero._picture' class="image" />
     </div>
     <div class="col-xs-6 info">
-        <div class="col-xs-12 title">{{ hero._nickname }}</div>
+        <div class="col-xs-12 title"><a (click)='onDetail()'>{{ hero._nickname }}</a></div>
         <div class="col-xs-12 text">{{ hero._name }}</div>
         <div class="col-xs-12 text">Estatura: {{ hero._height | convertToMeters | number : '1.2-2' }}mt</div>
     </div>
 </div>
-          
-                
-          
-        

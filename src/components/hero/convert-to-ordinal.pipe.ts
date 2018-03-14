@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 export class ConvertToOrdinalPipe{
     transform(value: number): string {
-        return this.getOrdinal(value + 1);
+        return this.getOrdinal(value);
     }
 
     getOrdinal(value: number): string {

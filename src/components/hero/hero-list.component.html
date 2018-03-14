@@ -1,6 +1,6 @@
 <div class="containerppal">
     <div class="container">
-        <div class="item" *ngFor='let hero of heroes | async'>
+        <div class="item" *ngFor='let hero of heroes$ | async'>            
             <app-herodetail [hero]='hero'></app-herodetail>
         </div>        
     </div>  

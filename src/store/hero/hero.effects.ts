@@ -24,25 +24,5 @@ export class HeroEffects {
             let hero$: Observable<IHero[]> = this.heroService.getHeroes();
             return hero$;
         })
-        .map(heroes => new HeroActions.GetHeroesSuccess(<Hero[]>heroes))
-
-    getHeroesWithId(heroes: Observable<IHero[]>) : Observable<Hero[]>{
-        let heroesToReturn: Observable<Hero[]>;
-        heroes.map(heroesOld =>  {
-            let newHero: Hero;
-            let acum: number;
-            heroesOld.forEach((t) => {
-                acum = acum + 1;
-                newHero = new Hero();
-                newHero._id = acum;
-                newHero._name = t._name;
-                newHero._height = t._height;
-                newHero._nickname = t._nickname;
-                newHero._picture = t._picture;
-                heroesToReturn.do(x => x.push(newHero));
-            });
-          });
-        
-        return heroesToReturn;
-    }
+        .map(heroes => new HeroActions.GetHeroesSuccess(heroes))    
 }

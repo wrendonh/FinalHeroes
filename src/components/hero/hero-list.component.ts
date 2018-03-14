@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import * as HeroActions from '../../store/hero/hero.actions';
-import { State, selectFeature } from '../../store/hero/hero.reducer';
+import { State, selectFeatureHeroes } from '../../store/hero/hero.reducer';
 import { Hero } from './hero';
 
 @Component({
@@ -13,18 +13,17 @@ import { Hero } from './hero';
 })
 
 export class HeroListComponent implements OnInit{
-    heroes: Observable<Hero[]>;
-    selectedHero: boolean;
-
-    constructor(private store: Store<State>){        
+    heroes$: Observable<Hero[]>;
+    
+    constructor(private store: Store<State>){             
     }
 
     ngOnInit(): void { 
-        this.heroes = this.store.select(selectFeature);
-        this.heroes.subscribe((t) => {
-            if(t === undefined) {      
+        this.heroes$ = this.store.select(selectFeatureHeroes);
+        this.heroes$.subscribe((t) => {
+            if(t === undefined || t.length === 0) {      
                 this.store.dispatch(new HeroActions.GetHeroes()); 
             }
-        });
+        }); 
     }
 }
