@@ -1,18 +1,30 @@
-
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import * as HeroActions from '../../store/hero/hero.actions';
-import { State } from 'store/hero/hero.reducer';
+import { State, selectFeature } from '../../store/hero/hero.reducer';
 import { Hero } from './hero';
 
 @Component({
-    selector: "app-hero-list",
+    selector: "app-hero",
     templateUrl: './hero-list.component.html',
     styleUrls: ['./hero-list.component.scss']   
 })
 
-export class HeroListComponent {
-    @Input() heroes;   
+export class HeroListComponent implements OnInit{
+    heroes: Observable<Hero[]>;
+    selectedHero: boolean;
+
+    constructor(private store: Store<State>){        
+    }
+
+    ngOnInit(): void { 
+        this.heroes = this.store.select(selectFeature);
+        this.heroes.subscribe((t) => {
+            if(t === undefined) {      
+                this.store.dispatch(new HeroActions.GetHeroes()); 
+            }
+        });
+    }
 }

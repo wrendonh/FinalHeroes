@@ -7,14 +7,12 @@ import { HeroService } from './hero.service';
 import { HeroDetailComponent } from './hero-detail.component';
 import { ConvertToMetersPipe } from './convert.to-meters.pipe';
 import { ConvertToOrdinalPipe } from './convert-to-ordinal.pipe';
-import { HeroComponent } from './hero.component';
 
 @NgModule({
     imports: [      
       CommonModule
     ],
     declarations: [
-      HeroComponent,
       HeroListComponent,
       HeroDetailComponent,
       ConvertToMetersPipe,     

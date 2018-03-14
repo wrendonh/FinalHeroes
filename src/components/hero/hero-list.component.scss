@@ -1,4 +1,21 @@
-.item {
+@mixin max-width($width) {
+	@media screen and (max-width: $width) {
+		@content;
+	}
+}
+
+.containerppal {
+  padding: 30px;
+  background-image: url('http://oyster.ignimgs.com/wordpress/stg.ign.com/2017/11/MHO_KeyArt_1920x1080_legal.jpg');    
+}
+
+.container {    
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+	
+	.item {
 		background-color: white;
 		padding: 20px;  
 		width: 320px;
@@ -8,4 +25,15 @@
 			
 		font-family: Arial, Helvetica, sans-serif;
 	}
-  
+
+	@include max-width(992px) {
+		.item {
+			flex-basis: 33%;		
+		}
+	}
+	
+	@include max-width(640px) {
+		.item {
+			flex-basis: 100%;		
+		}
+	}

@@ -22,19 +22,27 @@ export class HeroEffects {
         .ofType<HeroActions.GetHeroes>(HeroActions.GET_HEROES)
         .switchMap(() => { 
             let hero$: Observable<IHero[]> = this.heroService.getHeroes();
-            return hero$
+            return hero$;
         })
         .map(heroes => new HeroActions.GetHeroesSuccess(<Hero[]>heroes))
 
-    // getHeroesWithId(heroes: Observable<IHero[]>) : Hero[]{
-    //     let heroesToReturn: Hero[];
-    //     let hero: Hero;
-    //     let acum: number;
-    //     heroes.forEach((t) => {
-    //         acum = acum + 1 ;
-    //         hero = new Hero();
-    //         hero._id = acum;
-    //         hero._name = t('')
-    //     })
-    //}
+    getHeroesWithId(heroes: Observable<IHero[]>) : Observable<Hero[]>{
+        let heroesToReturn: Observable<Hero[]>;
+        heroes.map(heroesOld =>  {
+            let newHero: Hero;
+            let acum: number;
+            heroesOld.forEach((t) => {
+                acum = acum + 1;
+                newHero = new Hero();
+                newHero._id = acum;
+                newHero._name = t._name;
+                newHero._height = t._height;
+                newHero._nickname = t._nickname;
+                newHero._picture = t._picture;
+                heroesToReturn.do(x => x.push(newHero));
+            });
+          });
+        
+        return heroesToReturn;
+    }
 }
